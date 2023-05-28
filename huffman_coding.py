@@ -1,9 +1,5 @@
-import sys
-from PyQt6.QtWidgets import QApplication, QDialog, QLineEdit, QPushButton, QVBoxLayout, QLabel
-
-"""
-test program!!
-"""
+from colorama import Fore, init
+init()
 
 class TreeNodes:  
     def __init__(self, frequency, symbol, left = None, right = None):  
@@ -68,9 +64,9 @@ def compare_compression(data, coding):
     
         # required bits for compressed data  
         after_comp += count_symbols * len(coding[symbol])  
-
-    print("Space usage before compression (in bits):", before_comp)  
-    print("Space usage after compression (in bits):",  after_comp)  
+    
+    print("Space before compression (bits):", before_comp)  
+    print("Space after compression (bits):",  after_comp)  
 
 
 def symbol_freq(data):  
@@ -94,6 +90,7 @@ def encoder(data):
     chosen_symbol = string_symbols.keys()  
     freq = string_symbols.values()  
 
+    print(Fore.CYAN + "-"*20 + Fore.RESET)
     print("symbols: ", chosen_symbol)  
     print("frequency: ", freq)  
       
@@ -162,49 +159,13 @@ def decoder(encode_data, tree):
     
     # return the main string
     return string  
-  
-
-""" GUI """
-
-class InputDialog(QDialog):
-    def __init__(self):
-        super().__init__()
-
-        self.setWindowTitle("Input Dialog")
-
-        # Create widgets
-        self.input_widget = QLineEdit()
-        self.ok_button = QPushButton("OK")
-        self.ok_button.setDefault(True)
-        self.result_label = QLabel()
-
-        # Add widgets to layout
-        layout = QVBoxLayout()
-        layout.addWidget(self.input_widget)
-        layout.addWidget(self.ok_button)
-        layout.addWidget(self.result_label)
-        self.setLayout(layout)
-
-        # Set connections
-        self.ok_button.clicked.connect(self.get_input_text)
-
-    def get_input_text(self):
-        text = self.input_widget.text()
-        encoding, tree = encoder(text)
-        self.result_label.setText(f"Encode: {encoding}")
-        self.result_label.setText(f"decode: {decoder(encoding, tree)}")
-        
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-
-    dialog = InputDialog()
-    dialog.exec()
-
-    sys.exit(app.exec())
-
-# --=================
-# data = "feshar"  
-# print(data)  
-# encoding, the_tree = encoder(data)  
-# print("Encoded output", encoding)  
-# print("Decoded Output", decoder(encoding, the_tree))  
+ 
+def runner(data):
+    print(data)
+    encoding, tree = encoder(data)
+    print("Encode result:", Fore.RED + encoding + Fore.RESET)
+    print("Decode result:", Fore.RED +  decoder(encoding, tree) + Fore.RESET)
+    print(Fore.CYAN + "*"*20 + Fore.RESET)
+ 
+data = input("enter something: ")
+runner(data)
