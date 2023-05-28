@@ -35,7 +35,8 @@ def symbol_code(node, value = ''):
         queue[node.symbol] = newValue  
            
     return queue  
-  
+    
+# alireza daneshfar
 def output_list(data, coding):  
     """ print the binary string of encoded data """
     binary_output = []
@@ -46,7 +47,7 @@ def output_list(data, coding):
     result = ''.join([str(item) for item in binary_output])      
     return result  
           
-
+# alireza daneshfar
 def compare_compression(data, coding):  
     """ compare compressed data before and after compression """
     # each element of queue takes 8 bits
