@@ -13,6 +13,8 @@ __pycache__/
 # files
 test.py
 
+#folders
+pyqt
 
 # Distribution / packaging
 .Python
