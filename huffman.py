@@ -1,6 +1,3 @@
-import tkinter as tk 
-
-window = tk.Tk()
 
 class TreeNodes:  
     def __init__(self, frequency, symbol, left = None, right = None):  
@@ -163,27 +160,30 @@ def decoder(encode_data, tree):
     # return the main string
     return string  
 
+# GUI
 
-# *** bug
+# window = tk.Tk()
+
+
+
+
+
+
+
+
 def runner(data):
     print(data)
     # print(type(encoder(data)))
 
     encoding, tree, tree_queue, encode, beforeComp, afterComp = encoder(data)
-
-    print("chosen symbols:", *tree_queue.keys())
-    print("frequency:", *tree_queue.values())
-    print("symbols with code:", encode)
-    print("befoer compression:", beforeComp)
-    print("after compression:", afterComp)
-    print("Encode result:", encoding)
-    print("Decode result:", decoder(encoding, tree))
     
-
-
-
-data = "ALI"
-runner(data)
-
-# data = input("enter something: ")
-# runner(data)
+    # chosen_symbol = tk.Label(text=list(tree_queue.keys()))
+    
+    # print("chosen symbols:", *tree_queue.keys())
+    # print("frequency:", *tree_queue.values())
+    # print("symbols with code:", encode)
+    # print("befoer compression:", beforeComp)
+    # print("after compression:", afterComp)
+    # print("Encode result:", encoding)
+    # print("Decode result:", decoder(encoding, tree))
+    

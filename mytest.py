@@ -1,5 +1,7 @@
-var = ''
-def hello():
-    var = 'hell'
+myDict = {'a': 1, 'b': 2, 'c': 3}
 
-print(var)
+key = ' '
+key = key.join(myDict.keys())
+
+print(key)
+
