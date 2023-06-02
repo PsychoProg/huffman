@@ -1,19 +1,6 @@
-import sys
-from PyQt6.QtWidgets import (
-    QApplication,
-    QLabel,
-    QPushButton,
-    QVBoxLayout,
-    QWidget,
-    QLineEdit,
-    QFormLayout,
-    QDialog
-)
+import tkinter as tk 
 
-
-def text_output(text):
-    QFormLayout.addRow(text, QLineEdit())
-
+window = tk.Tk()
 
 class TreeNodes:  
     def __init__(self, frequency, symbol, left = None, right = None):  
@@ -79,10 +66,10 @@ def compare_compression(data, coding):
     
         # required bits for compressed data  
         after_comp += count_symbols * len(coding[symbol])  
-    text_output(before_comp)
-    print("Space before compression (bits):", before_comp)  
-    print("Space after compression (bits):",  after_comp)  
-    
+
+    # print("Space before compression (bits):", before_comp)  
+    # print("Space after compression (bits):",  after_comp)  
+    return before_comp, after_comp    
 
 def symbol_freq(data):  
     """ count frequency of each symbol """
@@ -101,20 +88,20 @@ def symbol_freq(data):
   
 def encoder(data):  
     """ Huffman ecnoder """
-    string_symbols = symbol_freq(data)  
-    chosen_symbol = string_symbols.keys()  
-    freq = string_symbols.values()  
+    tree_queue = symbol_freq(data)  
+    chosen_symbol = tree_queue.keys()  
+    freq = tree_queue.values()  
 
     
-    print("symbols: ", chosen_symbol)  
-    print("frequency: ", freq)  
+    # print("symbols: ", chosen_symbol)  
+    # print("frequency: ", freq)  
       
     # save nodes in a list
     nodes = []  
       
     # making the huffman tree use nodes and symbols
     for symbol in chosen_symbol:  
-        nodes.append(TreeNodes(string_symbols.get(symbol), symbol))  
+        nodes.append(TreeNodes(tree_queue.get(symbol), symbol))  
       
     while len(nodes) > 1:  
         # sorting nodes 
@@ -139,18 +126,19 @@ def encoder(data):
     
     # start the tree from first node (0 index) 
     encoder = symbol_code(nodes[0])  
-    print("symbols with codes", encoder)  
+    # print("symbols with codes", encoder)  
 
     # compare compression after huffman encoding
-    compare_compression(data, encoder)  
-    
+    beforeComp, afterComp = compare_compression(data, encoder)  
+    # print("before", beforeComp)
+    # print("after", afterComp)
     # create a binary output
     encoded_data = output_list(data,encoder)  
+    # printer(chosen_symbol, freq, encoder, beforeComp, afterComp)
+
+    return encoded_data, nodes[0], tree_queue, encoder, beforeComp, afterComp
 
 
-    return encoded_data, nodes[0]  
-
-  
 def decoder(encode_data, tree):  
     """ travel the tree code till reach the last leaf and add the last leaf symbol to the decode list """
     treeHead = tree  
@@ -174,30 +162,28 @@ def decoder(encode_data, tree):
     
     # return the main string
     return string  
- 
+
+
+# *** bug
 def runner(data):
     print(data)
-    encoding, tree = encoder(data)
+    # print(type(encoder(data)))
+
+    encoding, tree, tree_queue, encode, beforeComp, afterComp = encoder(data)
+
+    print("chosen symbols:", *tree_queue.keys())
+    print("frequency:", *tree_queue.values())
+    print("symbols with code:", encode)
+    print("befoer compression:", beforeComp)
+    print("after compression:", afterComp)
     print("Encode result:", encoding)
     print("Decode result:", decoder(encoding, tree))
     
-    
+
+
+
 data = "ALI"
 runner(data)
+
 # data = input("enter something: ")
 # runner(data)
-
-app = QApplication([])
-window = QWidget()
-window.setWindowTitle("huffman")
-layout = QVBoxLayout()
-
-button = QPushButton("Ok")
-button.clicked.connect(text_output)
-
-layout.addWidget(button)
-msgLabel = QLabel("")
-layout.addWidget(msgLabel)
-window.setLayout(layout)
-window.show()
-sys.exit(app.exec())
