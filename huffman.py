@@ -33,6 +33,7 @@ def symbol_code(node, value = ''):
         queue[node.symbol] = newValue  
            
     return queue  
+
     
 # alireza daneshfar
 def output_list(data, coding):  
@@ -44,7 +45,8 @@ def output_list(data, coding):
           
     result = ''.join([str(item) for item in binary_output])      
     return result  
-          
+
+
 # alireza daneshfar
 def compare_compression(data, coding):  
     """ compare compressed data before and after compression """
@@ -64,9 +66,8 @@ def compare_compression(data, coding):
         # required bits for compressed data  
         after_comp += count_symbols * len(coding[symbol])  
 
-    # print("Space before compression (bits):", before_comp)  
-    # print("Space after compression (bits):",  after_comp)  
     return before_comp, after_comp    
+
 
 def symbol_freq(data):  
     """ count frequency of each symbol """
@@ -89,10 +90,6 @@ def encoder(data):
     chosen_symbol = tree_queue.keys()  
     freq = tree_queue.values()  
 
-    
-    # print("symbols: ", chosen_symbol)  
-    # print("frequency: ", freq)  
-      
     # save nodes in a list
     nodes = []  
       
@@ -123,15 +120,13 @@ def encoder(data):
     
     # start the tree from first node (0 index) 
     encoder = symbol_code(nodes[0])  
-    # print("symbols with codes", encoder)  
+
 
     # compare compression after huffman encoding
     beforeComp, afterComp = compare_compression(data, encoder)  
-    # print("before", beforeComp)
-    # print("after", afterComp)
     # create a binary output
     encoded_data = output_list(data,encoder)  
-    # printer(chosen_symbol, freq, encoder, beforeComp, afterComp)
+
 
     return encoded_data, nodes[0], tree_queue, encoder, beforeComp, afterComp
 
@@ -159,31 +154,4 @@ def decoder(encode_data, tree):
     
     # return the main string
     return string  
-
-# GUI
-
-# window = tk.Tk()
-
-
-
-
-
-
-
-
-def runner(data):
-    print(data)
-    # print(type(encoder(data)))
-
-    encoding, tree, tree_queue, encode, beforeComp, afterComp = encoder(data)
-    
-    # chosen_symbol = tk.Label(text=list(tree_queue.keys()))
-    
-    # print("chosen symbols:", *tree_queue.keys())
-    # print("frequency:", *tree_queue.values())
-    # print("symbols with code:", encode)
-    # print("befoer compression:", beforeComp)
-    # print("after compression:", afterComp)
-    # print("Encode result:", encoding)
-    # print("Decode result:", decoder(encoding, tree))
     

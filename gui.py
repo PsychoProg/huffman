@@ -8,12 +8,8 @@ def show_result():
     encoding, tree, tree_queue, encode, beforeComp, afterComp = encoder(data)
     decoding = decoder(encoding, tree)
 
-    
-
-    
     symobls = ' '.join('%s= %s,' % (k,tree_queue[k]) for k in tree_queue.keys())
     encode = ' '.join('%s= %s' % (k,encode[k]) for k in encode.keys())
-    print(type(encode))
     
     msg = f"""Symbols and frequency:\n{symobls}\nCode: \n{encode}\n\nSpace before compression: {beforeComp}
     Space after compression: {afterComp}\n\nEncoded result: {encoding}\n Decoding result: {decoding}\n"""
@@ -30,7 +26,7 @@ data_entry = tk.Entry(root)
 
 # Create the button widget
 submit_button = tk.Button(root, text="Submit", command=show_result)
-# submit_button.bind('<Button-1>', show_result)
+
 # Create the result label widget
 result_label = tk.Label(root, text="")
 
