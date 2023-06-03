@@ -31,7 +31,7 @@ def symbol_code(node, value = ''):
     if(node.right):  
         symbol_code(node.right, newValue)  
   
-    if(not node.left and not node.right):  
+    if(not node.left and not node.right):
         queue[node.symbol] = newValue  
            
     return queue  
@@ -73,21 +73,21 @@ def compare_compression(data, coding):
 def symbol_freq(data):  
     """ count frequency of each symbol """
     chosen_symbol = dict() 
-
+    
     # after each repetition of element queue item val + 1 
     for item in data:  
         if chosen_symbol.get(item) == None:  
             chosen_symbol[item] = 1  
         else:   
             chosen_symbol[item] += 1     
-
     # return number of each symbol freq  
     return chosen_symbol  
   
-  
+
 def encoder(data):  
     """ Huffman ecnoder """
-    string_symbols = symbol_freq(data)  
+    string_symbols = symbol_freq(data)
+
     chosen_symbol = string_symbols.keys()  
     freq = string_symbols.values()  
 
@@ -160,13 +160,14 @@ def decoder(encode_data, tree):
     
     # return the main string
     return string  
- 
+
+
 def runner(data):
     print(data)
     encoding, tree = encoder(data)
     print("Encode result:", Fore.RED + encoding + Fore.RESET)
     print("Decode result:", Fore.RED +  decoder(encoding, tree) + Fore.RESET)
     print(Fore.CYAN + "*"*20 + Fore.RESET)
- 
+    print(queue)
 data = input("enter something: ")
 runner(data)

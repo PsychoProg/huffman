@@ -155,3 +155,6 @@ def decoder(encode_data, tree):
     # return the main string
     return string  
     
+
+def cleaner():
+    queue.clear()
