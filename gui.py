@@ -1,10 +1,11 @@
 import tkinter as tk
 from huffman import encoder, decoder, cleaner
 
+
 def show_result():
     # Get the data from the entry widget
     data = data_entry.get()
-    
+        
     encoding, tree, tree_queue, encode, beforeComp, afterComp = encoder(data)
     decoding = decoder(encoding, tree)
 
@@ -18,11 +19,14 @@ def show_result():
     encode = ' '.join('%s= %s' % (k,encode[k]) for k in encode.keys())
     
     msg = f"""Symbols and frequency:\n{symobls}\nCode: \n{encode}\n\nSpace before compression: {beforeComp}
-    Space after compression: {afterComp}\n\nEncoded result: {encoding}\n Decoding result: {decoding}\n"""
+    Space after compression: {afterComp}\n\nEncoded result: {encoding}\nDecoding result: {decoding}\n"""
     
     # Update the label with the data
-    result_label.config(text=msg, height=10, width=60, bd='4', font=("Times", "18"))
+    result_label.config(text=msg, height=20, width=80, bd='4', font=("Times", "16"))
+    
+    # clean the dictionary and get ready for new sentences
     cleaner()
+
 # Create the main window
 root = tk.Tk()
 
