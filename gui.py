@@ -19,10 +19,10 @@ def show_result():
     encode = ' '.join('%s= %s' % (k,encode[k]) for k in encode.keys())
     
     msg = f"""Symbols and frequency:\n{symobls}\n\nCode: \n{encode}\n\nSpace before compression: {beforeComp}
-    Space after compression: {afterComp}\n\nEncoded result: {encoding}\nDecoding result: {decoding}\n"""
+    Space after compression: {afterComp}\n\nEncoded result:\n{encoding}\n\nDecoding result:\n{decoding}\n"""
     
     # Update the label with the data
-    result_label.config(text=msg, height=20, width=80, bd='4', font=("Times", "16"))
+    result_label.config(text=msg, height=15, width=800, bd='5', font=("Times", "12"))
     
     # clean the dictionary and get ready for new sentences
     cleaner()
