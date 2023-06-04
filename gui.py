@@ -18,7 +18,7 @@ def show_result():
     symobls = ' '.join('%s= %s,' % (k,tree_queue[k]) for k in tree_queue.keys())
     encode = ' '.join('%s= %s' % (k,encode[k]) for k in encode.keys())
     
-    msg = f"""Symbols and frequency:\n{symobls}\nCode: \n{encode}\n\nSpace before compression: {beforeComp}
+    msg = f"""Symbols and frequency:\n{symobls}\n\nCode: \n{encode}\n\nSpace before compression: {beforeComp}
     Space after compression: {afterComp}\n\nEncoded result: {encoding}\nDecoding result: {decoding}\n"""
     
     # Update the label with the data
